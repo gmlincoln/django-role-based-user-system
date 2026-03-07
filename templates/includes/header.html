@@ -1,0 +1,23 @@
+<nav class="bg-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+        <!-- Left Logo -->
+        <a href="{% url 'home' %}" class="text-2xl font-bold">MySite</a>
+
+        <!-- Right Menu -->
+        <div class="flex items-center space-x-6">
+            <a href="{% url 'home' %}" class="hover:underline">Home</a>
+            <a href="{% url 'register' %}" class="hover:underline">Register</a>
+            <a href="{% url 'login' %}" class="hover:underline">Login</a>
+
+            <!-- Profile -->
+            <div class="flex items-center space-x-2">
+                <a href="#" class="hover:underline">Profile</a>
+                <img src="https://i.pravatar.cc/100" class="w-9 h-9 rounded-full border-2 border-white object-cover"
+                    alt="Profile">
+            </div>
+
+            <a href="#" class="hover:underline">Logout</a>
+        </div>
+    </div>
+</nav>

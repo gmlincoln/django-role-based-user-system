@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<!-- ===== HERO SECTION ===== -->
+<section class="h-[80vh] bg-cover bg-center flex items-center justify-center text-center"
+    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f');">
+
+    <div class="text-white px-4">
+        <h1 class="text-5xl font-bold mb-4">Welcome to My Website</h1>
+        <p class="text-xl mb-6">Build your future with modern web technology</p>
+        <button class="bg-yellow-400 text-black px-6 py-3 rounded font-semibold hover:bg-yellow-300">
+            Get Started
+        </button>
+    </div>
+</section>
+
+
+<!-- ===== CONTENT SECTION ===== -->
+<section class="py-16 px-6 text-center">
+    <h2 class="text-3xl font-bold mb-4 text-gray-800">About Our Platform</h2>
+    <p class="max-w-2xl mx-auto text-gray-600 leading-relaxed">
+        This is a simple homepage layout built with Tailwind CSS.
+        You can connect it with Django backend, authentication system,
+        and dynamic user profile easily. Perfect for portfolio, LMS,
+        job portal, or any modern web project.
+    </p>
+</section>
+
+{% endblock %}
