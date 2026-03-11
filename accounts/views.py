@@ -3,6 +3,12 @@ from django.contrib import messages
 
 from .models import CustomUser, RecruiterProfile, JobSeekerProfile 
 
+from jobs.models import Job
+
+from django.contrib.auth import authenticate,login, logout
+
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def home(request):
     
@@ -58,4 +64,43 @@ def register(request):
 
 def login_view(request):
     
+    if request.method == 'POST':
+        user_input = request.POST.get('email_or_username')
+        password = request.POST.get('password')
+        
+        try:
+            user_info = CustomUser.objects.get(email = user_input)
+            user_name = user_info.usename 
+            
+        except CustomUser.DoesNotExist:
+            user_name = user_input 
+                            
+        user = authenticate(request, username = user_name, password = password)
+        
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Login Successful')
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid Credential!')
+            return redirect('login')
+    
     return render(request, 'accounts/login.html')
+
+def logout_view(request):
+    
+    logout(request)
+    messages.success(request, 'Logout Successful')
+    
+    return redirect('login')
+
+@login_required
+def profile(request):
+    
+    jobs = Job.objects.filter(recruiter = request.user.recruiterprofile )
+    
+    context = {
+        'jobs':jobs 
+    }
+    
+    return render(request, 'accounts/profile.html', context)

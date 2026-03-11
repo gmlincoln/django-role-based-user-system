@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+{% if request.user.is_authenticated %}
+
+
+{% if request.user.role == 'job_seeker' %}
+
+<div class="max-w-4xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8">
+
+    <!-- Header -->
+    <div class="flex items-center gap-6">
+        <img src="{{ request.user.profiel_picture.url }}" class="w-28 h-28 rounded-full border-4 border-blue-500">
+        <div>
+            <h2 class="text-2xl font-bold">{{ request.user.get_full_name }}</h2>
+            <p class="text-gray-600">Frontend Developer</p>
+            <p class="text-sm text-gray-500">📍 Dhaka, Bangladesh</p>
+        </div>
+    </div>
+
+    <!-- About -->
+    <div class="mt-8">
+        <h3 class="text-lg font-semibold border-b pb-2">Career Summary</h3>
+        <p class="text-gray-600 mt-3">
+            Passionate frontend developer with strong knowledge of HTML, CSS, Tailwind,
+            JavaScript, and React. Looking for opportunities to build modern web apps.
+        </p>
+    </div>
+
+    <!-- Skills -->
+    <div class="mt-8">
+        <h3 class="text-lg font-semibold border-b pb-2">Skills</h3>
+        <div class="flex flex-wrap gap-3 mt-3">
+            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">HTML</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">CSS</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Tailwind</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">JavaScript</span>
+            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">React</span>
+        </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="mt-8">
+        <h3 class="text-lg font-semibold border-b pb-2">Experience</h3>
+        <div class="mt-3">
+            <p class="font-medium">Junior Web Developer — ABC Tech</p>
+            <p class="text-sm text-gray-500">2024 - Present</p>
+            <p class="text-gray-600 text-sm mt-1">
+                Worked on responsive UI, landing pages, and dashboard interfaces.
+            </p>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="mt-8">
+        <h3 class="text-lg font-semibold border-b pb-2">Contact</h3>
+        <p class="text-gray-600 mt-2">📧 john@example.com</p>
+        <p class="text-gray-600">📞 +880 1234-567890</p>
+        <p class="text-blue-600">🔗 linkedin.com/in/johndoe</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="mt-10 flex gap-4">
+        <button class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            Edit Profile
+        </button>
+        <button class="px-5 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+            Download CV
+        </button>
+    </div>
+
+</div>
+
+{% else %}
+<div class="max-w-4xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8">
+
+    <!-- Header -->
+    <div class="flex items-center gap-6">
+        <img src="{{ request.user.profile_picture.url }}" class="w-28 h-28 rounded-full border-4 border-green-500">
+        <div>
+            <h2 class="text-2xl font-bold">{{ request.user.get_full_name }}</h2>
+            <p class="text-gray-600">Senior HR Manager</p>
+            <p class="text-sm text-gray-500">🏢 Tech Solutions Ltd.</p>
+            <p class="text-sm text-gray-500">📍 Dhaka, Bangladesh</p>
+        </div>
+    </div>
+
+    <!-- Company Info -->
+    <div class="mt-8">
+        <h3 class="text-lg font-semibold border-b pb-2">Company Overview</h3>
+        <p class="text-gray-600 mt-3">
+            Tech Solutions Ltd. is a fast-growing software company specializing in
+            enterprise systems, mobile apps, and cloud services.
+        </p>
+    </div>
+
+
+
+    <!-- Active Jobs -->
+    <div class="mt-8">
+        <h3 class="text-lg font-semibold border-b pb-2">Job Posts</h3>
+        <div class="mt-3 space-y-3">
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+
+                    <!-- Table Head -->
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600">#</th>
+                            <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600">Job Title</th>
+                            <th class="py-3 px-4 text-left text-sm font-semibold text-gray-600">Deadline</th>
+                            <th class="py-3 px-4 text-center text-sm font-semibold text-gray-600">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <!-- Table Body -->
+                    <tbody class="divide-y divide-gray-200">
+
+                        {% for job in jobs %}
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 text-sm text-gray-600">{{ job.id }}</td>
+                            <td class="py-3 px-4 font-medium">{{ job.title }}</td>
+                            <td class="py-3 px-4 text-sm text-gray-500">30 April 2026</td>
+                            <td class="py-3 px-4">
+                                <div class="flex justify-center gap-3 text-sm">
+                                    <a href="#" class="text-blue-600 hover:underline">View</a>
+                                    <a href="#" class="text-yellow-600 hover:underline">Edit</a>
+                                    <button class="text-red-600 hover:underline">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- Actions -->
+    <div class="mt-10 flex gap-4">
+        <button class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+            Edit Company Profile
+        </button>
+        <a href="{% url 'create_job' %}" class="px-5 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+            Post New Job
+        </a>
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endif %}
+
+
+
+
+
+{% endblock %}
