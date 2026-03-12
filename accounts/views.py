@@ -12,7 +12,13 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     
-    return render(request, 'accounts/index.html')
+    jobs = Job.objects.all()
+    
+    context ={
+        'jobs': jobs
+    }
+    
+    return render(request, 'accounts/index.html', context)
 
 
 def register(request):

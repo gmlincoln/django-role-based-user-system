@@ -1,10 +1,13 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Job
+
+from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
 # Create your views here.
 
+@login_required
 def create_job(request):
     if request.method == "POST":
         job_title = request.POST.get('title')
@@ -31,3 +34,40 @@ def create_job(request):
         return redirect('profile')        
         
     return render(request, 'jobs/create_job.html')
+
+
+@login_required
+def update_job(request, job_id):
+    job = Job.objects.get(id = job_id, recruiter = request.user.recruiterprofile )
+    
+    
+    if request.method == "POST":
+        job.title = request.POST.get('title')
+        job.description = request.POST.get('description')
+        job.openings = request.POST.get('openings')
+        job.job_type = request.POST.get('job_type')
+        job.location = request.POST.get('location')
+        job.deadline = request.POST.get('deadline')
+        job.salary = request.POST.get('salary')
+        
+        job.save()
+        messages.success(request, "Job Successfully Updated!")
+        
+        return redirect('profile') 
+    
+    context = {
+        'job': job
+    }
+    
+    return render(request, 'jobs/update_job.html', context)
+
+
+@login_required
+def delete_job(request, job_id):
+    job = get_object_or_404(Job, id = job_id, recruiter = request.user.recruiterprofile)
+
+    job.delete()
+    messages.success(request, "Job delete Successfully!")
+    
+    return redirect('profile')
+
