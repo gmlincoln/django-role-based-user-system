@@ -32,9 +32,6 @@ Home
                 {{ job.title }}
             </h2>
 
-            <p class="text-gray-600 text-sm mb-3">
-                {{ job.description|truncatewords:20 }}
-            </p>
 
             <div class="space-y-1 text-sm text-gray-700">
                 <p><span class="font-semibold">Location:</span> {{ job.location }}</p>
@@ -49,9 +46,9 @@ Home
                     BDT {{ job.salary }}
                 </span>
 
-                <a href=""
+                <a href="{% url 'job_details' job.id %}"
                     class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                    Apply
+                    View Details 
                 </a>
 
             </div>

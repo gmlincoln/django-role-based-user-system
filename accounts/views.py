@@ -103,10 +103,13 @@ def logout_view(request):
 @login_required
 def profile(request):
     
-    jobs = Job.objects.filter(recruiter = request.user.recruiterprofile )
-    
+    if request.user.role == 'recruiter':
+        jobs = Job.objects.filter(recruiter = request.user.recruiterprofile )
+    else:
+        jobs = Job.objects.none()
+        
     context = {
-        'jobs':jobs 
-    }
+            'jobs':jobs 
+        }     
     
     return render(request, 'accounts/profile.html', context)
